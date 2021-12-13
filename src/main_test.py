@@ -3,9 +3,8 @@ import create_db_connection
 import create_db_objects_test
 
 if __name__ == '__main__':
-    database = "../db/StackOverflow_Test.db"
+    database = "./db/StackOverflow_Test.db"
     conn = create_db_connection.create_connection(database)
-
     sql_create_stg_posts_table = """ CREATE TABLE IF NOT EXISTS tbl_Stg_Posts_Test (
             Id text,
             PostTypeId text,

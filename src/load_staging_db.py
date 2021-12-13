@@ -3,10 +3,10 @@ import xml.etree.ElementTree as ET
 
 def load_stg_posts(conn, srcfile):
 
-    myTree = ET.ElementTree(file=srcfile)
-    myRoot = myTree.getroot()
+    postsTree = ET.ElementTree(file=srcfile)
+    postsRoot = postsTree.getroot()
     Posts = []
-    for tag in myRoot:
+    for tag in postsRoot:
         Id = tag.get('Id')
         PostTypeId = tag.get('PostTypeId')
         ParentId = tag.get('ParentId')
@@ -34,19 +34,19 @@ def load_stg_posts(conn, srcfile):
     cur.execute("DELETE FROM tbl_Stg_Posts")
     cur.executemany("INSERT INTO tbl_Stg_Posts VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Posts)
 
+    conn.commit()
+
     cur.execute("SELECT COUNT(1) FROM tbl_Stg_Posts;")
     record_count = cur.fetchall()
     for records_loaded in record_count:
         return str(records_loaded[0])
 
-    conn.commit()
-
 def load_stg_tags(conn, srcfile):
 
-    myTree = ET.ElementTree(file=srcfile)
-    myRoot = myTree.getroot()
+    tagsTree = ET.ElementTree(file=srcfile)
+    tagsRoot = tagsTree.getroot()
     tags = []
-    for tag in myRoot:
+    for tag in tagsRoot:
         Id = tag.get('Id')
         TagName = tag.get('TagName')
         Count = tag.get('Count')
@@ -59,9 +59,9 @@ def load_stg_tags(conn, srcfile):
     cur.execute("DELETE FROM tbl_Stg_Tags")
     cur.executemany("INSERT INTO tbl_Stg_Tags VALUES (?, ?, ?, ?, ?)", tags)
 
+    conn.commit()
+
     cur.execute("SELECT COUNT(1) FROM tbl_Stg_Tags;")
     record_count = cur.fetchall()
     for records_loaded in record_count:
         return str(records_loaded[0])
-
-    conn.commit()

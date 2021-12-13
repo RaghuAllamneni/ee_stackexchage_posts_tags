@@ -4,15 +4,15 @@ import load_main_db_test
 import create_db_objects_test
 
 def load_stackoverflow():
-    database = "../db/StackOverflow_Test.db"
+    database = "./db/StackOverflow_Test.db"
     conn = create_db_connection.create_connection(database)
 
     if conn is not None:         
         print('\n'+ 'Loading data into Stg_Posts from source xml file')
-        load_staging_db_test.load_stg_posts(conn, '../Test_Files/Test_Posts.xml')
+        load_staging_db_test.load_stg_posts(conn, './Test_Files/Test_Posts.xml')
         print('Finished loading data into Stg_Posts from source xml file')
         print('Loading data into Stg_Tags from source xml file')
-        load_staging_db_test.load_stg_tags(conn, '../Test_Files/Test_Tags.xml')
+        load_staging_db_test.load_stg_tags(conn, './Test_Files/Test_Tags.xml')
         print('Finished loading data into Stg_Tags from source xml file')        
         
     else:

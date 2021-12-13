@@ -17,7 +17,7 @@ def create_table(conn, create_table_sql):
     conn.commit()
 
 if __name__ == "__main__":
-    database = "../db/StackOverflow.db"
+    database = "./db/StackOverflow.db"
     conn = create_db_connection.create_connection(database)
     sql_create_stg_posts_table = """ CREATE TABLE IF NOT EXISTS tbl_Stg_Posts (
             Id text,
